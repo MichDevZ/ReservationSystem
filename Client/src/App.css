@@ -1,0 +1,101 @@
+﻿@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+
+body {
+    background-color: black;
+}
+
+#root {
+ 
+    margin: 0 auto;
+    text-align: center;
+}
+
+th, td {
+    padding-left: 1rem;
+    padding-right: 1rem;
+}
+
+.nav-link {
+    @apply relative;
+  }
+
+  .nav-link::after {
+    content: '';
+    @apply absolute bottom-0 left-0 w-full h-0.5 bg-orange-500 transform scale-x-0 origin-left transition-transform duration-300;
+  }
+
+  .nav-link:hover::after {
+    @apply scale-x-100;
+  }
+
+  .img1 {
+    mask-image: linear-gradient(
+        black 70%,
+        transparent
+    );
+  }
+
+  .cabin-link {
+    @apply relative;
+    overflow: hidden; /* Para que el borde no sobresalga */
+}
+
+
+
+.cabin-link::after {
+    content: '';
+    @apply absolute top-0 left-0 w-full h-full border-2 border-orange-500;
+    border-width: 2px; /* Mantener el grosor del borde */
+    transform: scaleY(0); /* Inicialmente no visible */
+    transform-origin: top; /* Punto de origen para la animación */
+    transition: transform 2s ease-in-out; /* Suaviza la animación */
+}
+
+.cabin-link:hover::after {
+    transform: scaleY(1); /* Escala el borde para que aparezca de arriba a abajo */
+}
+
+
+@supports (animation: grow .5s cubic-bezier(.25, .25, .25, 1) forwards) {
+  .tick {
+     stroke-opacity: 0;
+     stroke-dasharray: 29px;
+     stroke-dashoffset: 29px;
+     animation: draw .5s cubic-bezier(.25, .25, .25, 1) forwards;
+     animation-delay: .6s
+ }
+
+ .circle {
+     fill-opacity: 0;
+     stroke: #219a00;
+     stroke-width: 16px;
+     transform-origin: center;
+     transform: scale(0);
+     animation: grow 1s cubic-bezier(.25, .25, .25, 1.25) forwards;   
+ }   
+}
+
+@keyframes grow {
+ 60% {
+     transform: scale(.8);
+     stroke-width: 4px;
+     fill-opacity: 0;
+ }
+ 100% {
+     transform: scale(.9);
+     stroke-width: 8px;
+     fill-opacity: 1;
+     fill: #219a00;
+ }
+}
+
+@keyframes draw {
+ 0%, 100% { stroke-opacity: 1; }
+ 100% { stroke-dashoffset: 0; }
+}
+
+
